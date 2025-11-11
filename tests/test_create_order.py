@@ -14,7 +14,7 @@ class TestCreateOrder:
         with allure.step(f'Создание заказа с {size} ингредиентами'):
             response = requests.post(f'{Curls.MAIN_URL}{Curls.URL_CREATE_ORDER}', data = payload, headers=access_token)
         assert response.status_code == 200
-        assert response.json()['success'] == True
+        assert response.json()['success']
 
     @allure.title('Тест создания заказа без авторизации')
     def test_create_order_without_authorization(self, get_ingredients):
@@ -40,7 +40,5 @@ class TestCreateOrder:
         payload = {'ingredients': hash_ingredient}
         with allure.step('Создание заказа с невалидным хэшом ингредиента'):
             response = requests.post(f'{Curls.MAIN_URL}{Curls.URL_CREATE_ORDER}', data = payload, headers=access_token)
-        assert response.status_code in [500, 400]
-        if response.status_code == 400:
-            assert response.json()['success'] == False
-        
+        assert response.status_code == 500
+                      
