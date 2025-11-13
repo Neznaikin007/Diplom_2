@@ -1,3 +1,6 @@
+import generators
+
+
 # Данные поьзователя дял авторизации
 class UserData:
     EMAIL = 'mihail@mail.ru'
@@ -24,5 +27,12 @@ class ResponseData:
     RESPONSE_INVALID_LOGIN = {'success': False,
                               'message': 'email or password are incorrect'}
     RESPONSE_INVALID_CREATE_ORDER = {'success': False,
-                                    'message': 'Ingredient ids must be provided'}
-    
+                                    'message': 'Ingredient ids must be provided'}   
+
+# Тестовые данныне для полей
+class TestData:
+    test_data = [
+    ('email', {'password': generators.generate_password(), 'name': generators.generate_name()}),
+    ('password', {'email': generators.generate_email(), 'name': generators.generate_name()}),
+    ('name', {'email': generators.generate_email(), 'password': generators.generate_password()})
+    ]
